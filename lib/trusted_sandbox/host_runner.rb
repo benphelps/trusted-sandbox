@@ -159,6 +159,10 @@ module TrustedSandbox
           # 'ExposedPorts' => {
           #     '22/tcp' => {}
           # }
+          'Ulimit' => {
+            'nofile' => '128:256',
+            'nproc' => '32:64'
+          }
       }
       basic_request.merge!('MemorySwap' => config.memory_swap_limit) if config.enable_swap_limit
       basic_request.merge!('Env' => ['USE_QUOTAS=1']) if config.enable_quotas
