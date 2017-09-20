@@ -172,6 +172,10 @@ module TrustedSandbox
     def start_container_request
       {
           'Binds' => ["#{code_dir_path}:#{config.container_code_path}"],
+          'Ulimit' => {
+            'nofile' => '128:256',
+            'nproc' => '32:64'
+          }
           # 'Links' => ['redis3:redis'],
           # 'LxcConf' => {'lxc.utsname' => 'docker'},
           # 'PortBindings' => {'22/tcp' => [{'HostPort' => '11022'}]},
