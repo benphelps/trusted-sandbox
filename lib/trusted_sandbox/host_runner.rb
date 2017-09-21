@@ -160,8 +160,8 @@ module TrustedSandbox
           #     '22/tcp' => {}
           # }
           'Ulimit' => {
-            { "Name": "nofile", "Soft": 128, "Hard": 256 },
-            { "Name": "nproc", "Soft": 32, "Hard": 64 },
+            { "Name" => "nofile", "Soft" => 128, "Hard" => 256 },
+            { "Name" => "nproc", "Soft" => 32, "Hard" => 64 },
           }
       }
       basic_request.merge!('MemorySwap' => config.memory_swap_limit) if config.enable_swap_limit
