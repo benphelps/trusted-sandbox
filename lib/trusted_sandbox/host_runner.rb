@@ -168,7 +168,7 @@ module TrustedSandbox
     def start_container_request
       {
           'Binds' => ["#{code_dir_path}:#{config.container_code_path}"],
-          'Ulimit' => [
+          'Ulimits' => [
             { "Name" => "nofile", "Soft" => 128, "Hard" => 256 },
             { "Name" => "nproc", "Soft" => 32, "Hard" => 64 },
           ]
