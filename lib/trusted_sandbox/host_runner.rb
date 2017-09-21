@@ -159,10 +159,6 @@ module TrustedSandbox
           # 'ExposedPorts' => {
           #     '22/tcp' => {}
           # }
-          'Ulimit' => [
-            { "Name" => "nofile", "Soft" => 128, "Hard" => 256 },
-            { "Name" => "nproc", "Soft" => 32, "Hard" => 64 },
-          ]
       }
       basic_request.merge!('MemorySwap' => config.memory_swap_limit) if config.enable_swap_limit
       basic_request.merge!('Env' => ['USE_QUOTAS=1']) if config.enable_quotas
@@ -172,6 +168,10 @@ module TrustedSandbox
     def start_container_request
       {
           'Binds' => ["#{code_dir_path}:#{config.container_code_path}"],
+          'Ulimit' => [
+            { "Name" => "nofile", "Soft" => 128, "Hard" => 256 },
+            { "Name" => "nproc", "Soft" => 32, "Hard" => 64 },
+          ]
           # 'Links' => ['redis3:redis'],
           # 'LxcConf' => {'lxc.utsname' => 'docker'},
           # 'PortBindings' => {'22/tcp' => [{'HostPort' => '11022'}]},
