@@ -25,7 +25,6 @@ module TrustedSandbox
     # @param klass [Class] the class object that should be run
     # @param *args [Array] arguments to send to klass#initialize
     # @return [Object] return value from the #eval method
-    # @raise [InternalError, UserCodeError, ContainerError]
     def run!(klass, *args)
       run(klass, *args).output!
     end
@@ -138,7 +137,7 @@ module TrustedSandbox
       basic_request = {
           # 'Hostname' => '',
           # 'Domainname' => '',
-          # 'User' => '',
+          'User' => "sandbox#{@uid.to_s}",
           'CpuShares' => config.cpu_shares,
           'Memory' => config.memory_limit,
           # 'Cpuset' => '0,1',
