@@ -139,6 +139,8 @@ module TrustedSandbox
           # 'Domainname' => '',
           'User' => "sandbox#{@uid.to_s}",
           'CpuShares' => config.cpu_shares,
+          'CpuQuota' => config.cpu_quota,
+          'CpuPeroid' => config.cpu_quota,
           'Memory' => config.memory_limit,
           # 'Cpuset' => '0,1',
           'AttachStdin' => false,
@@ -168,8 +170,8 @@ module TrustedSandbox
       {
           'Binds' => ["#{code_dir_path}:#{config.container_code_path}"],
           'Ulimits' => [
-            { "Name" => "nofile", "Soft" => 128, "Hard" => 256 },
-            { "Name" => "nproc", "Soft" => 128, "Hard" => 256 },
+            { "Name" => "nofile", "Soft" => config.nofile_soft, "Hard" => config.nofile_hard },
+            { "Name" => "nproc", "Soft" => config.nproc_soft, "Hard" => config.nproc_hard },
           ]
           # 'Links' => ['redis3:redis'],
           # 'LxcConf' => {'lxc.utsname' => 'docker'},
